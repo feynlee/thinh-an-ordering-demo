@@ -15,7 +15,7 @@ export function About() {
           <li>✔︎ <strong>No real orders.</strong> “Orders” are saved only in your browser (localStorage) and are numbered <code>DEMO-xxxx</code>.</li>
           <li>✔︎ <strong>No payments.</strong> The payment step is a simulated handoff with no card fields.</li>
           <li>✔︎ <strong>No Clover connection.</strong> The site makes no calls to Clover or any backend, and holds no credentials.</li>
-          <li>✔︎ <strong>No restaurant photos.</strong> Dish images are original illustrations drawn for this demo. The logo mark is a placeholder, not the restaurant's logo.</li>
+          <li>✔︎ <strong>No borrowed photos.</strong> Dish images are original illustrations drawn for this demo, and the storefront is an illustration too. A real photo appears only when it is credited on the dish and we have the right to use it. The colors echo the storefront sign; the bowl mark is a placeholder, not the restaurant's logo.</li>
           <li>✔︎ <strong>Not indexed.</strong> Pages are marked <code>noindex</code> so customers don't find this instead of the real ordering page.</li>
         </ul>
         <h2 className="font-display text-2xl text-jade-dark mt-4">Where the information comes from</h2>

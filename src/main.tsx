@@ -7,6 +7,7 @@ import "@fontsource/be-vietnam-pro/700.css";
 import "@fontsource/fraunces/400.css";
 import "@fontsource/fraunces/400-italic.css";
 import "@fontsource/fraunces/600.css";
+import "@fontsource/fraunces/800.css";
 import "./index.css";
 import App from "./App";
 import { StoreProvider } from "./lib/store";

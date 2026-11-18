@@ -4,7 +4,7 @@ import { useT } from "../lib/i18n";
 import { findItem } from "../data/menu";
 import { usd } from "../lib/money";
 import { go } from "../lib/router";
-import { DishArt } from "../art/DishArt";
+import { DishVisual } from "./DishVisual";
 import { Icon } from "./Icon";
 import { ItemSheet } from "./ItemSheet";
 
@@ -53,7 +53,7 @@ export function CartDrawer() {
                 const opts = optionLabels(l.choices);
                 return (
                   <li key={l.lineId} className="p-4 flex gap-3">
-                    <DishArt kind={it.art} className="w-16 h-16 rounded-xl shrink-0" title={it.nameEn} />
+                    <DishVisual item={it} className="w-16 h-16 rounded-xl shrink-0" />
                     <div className="min-w-0 flex-1">
                       <div className="flex justify-between gap-2">
                         <p className="font-semibold leading-tight">{it.nameVi}</p>

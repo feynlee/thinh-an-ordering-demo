@@ -1,7 +1,7 @@
 import type { MenuItem } from "../data/menu";
 import { usd } from "../lib/money";
 import { useT } from "../lib/i18n";
-import { DishArt } from "../art/DishArt";
+import { DishVisual } from "./DishVisual";
 import { Icon } from "./Icon";
 
 export function DietaryTags({ item }: { item: MenuItem }) {
@@ -21,10 +21,10 @@ export function DietaryTags({ item }: { item: MenuItem }) {
 
 export function DishCard({ item, onOpen, compact }: { item: MenuItem; onOpen: () => void; compact?: boolean }) {
   return (
-    <button onClick={onOpen} className="group text-left w-full rounded-3xl bg-white shadow-card hover:shadow-lift transition overflow-hidden flex sm:flex-col focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-jade">
+    <button onClick={onOpen} className="group text-left w-full rounded-2xl bg-white border border-line/70 shadow-card hover:shadow-lift transition overflow-hidden flex sm:flex-col focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-jade">
       <div className={`relative shrink-0 ${compact ? "w-full" : "w-32 sm:w-full"} overflow-hidden`}>
-        <DishArt kind={item.art} title={item.nameEn} className={`w-full ${compact ? "h-36" : "h-full min-h-[128px] sm:h-40"} group-hover:scale-[1.03] transition-transform duration-300`} />
-        {item.number && <span className="absolute left-2.5 top-2.5 rounded-full bg-paper/95 px-2 py-0.5 text-[12px] font-bold text-chili">#{item.number}</span>}
+        <DishVisual item={item} className={`w-full ${compact ? "h-36" : "h-full min-h-[128px] sm:h-40"} group-hover:scale-[1.03] transition-transform duration-300`} />
+        {item.number && <span className="absolute left-2.5 top-2.5 rounded-full bg-chili px-2 py-0.5 text-[12px] font-bold text-paper shadow">#{item.number}</span>}
       </div>
       <div className="p-4 flex-1 flex flex-col min-w-0">
         <p className="font-display text-[19px] leading-tight text-jade-dark">{item.nameVi}</p>

@@ -211,7 +211,7 @@ function PaymentHandoff({ total, onCancel, onPaid }: { total: number; onCancel: 
     <>
       <div className="fixed inset-0 z-40 bg-ink/60" aria-hidden="true" />
       <div role="dialog" aria-modal="true" aria-labelledby="pay-title" className="fixed z-50 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[calc(100%-32px)] max-w-md rounded-3xl bg-white shadow-lift overflow-hidden">
-        <div className="bg-[repeating-linear-gradient(45deg,#E0A42B,#E0A42B_10px,#2A1F17_10px,#2A1F17_20px)] h-2" />
+        <div className="bg-[repeating-linear-gradient(45deg,#EA9F2F,#EA9F2F_10px,#2B2420_10px,#2B2420_20px)] h-2" />
         <div className="p-6">
           <p className="inline-flex rounded bg-turmeric px-2 py-0.5 text-[11px] font-bold uppercase tracking-wide">Simulated payment page</p>
           {step === "redirect" ? (

@@ -47,3 +47,18 @@ npm run build      # outputs dist/
 ## Going to production
 
 Replace the simulated cart/checkout with "Order pickup" links to the restaurant's Clover ordering page, swap illustrations for the owner's photos, remove the demo banner and `noindex`, and host under the restaurant's own account and domain. Do **not** put Clover API keys in this frontend: GitHub Pages cannot keep secrets. A custom Clover API integration would need a separate secure backend.
+
+## Look and feel
+
+The palette comes from the storefront: stucco cream, the maroon sign panel with green and orange lettering,
+green striped awnings, and the wood deli counter (`tailwind.config.js`). The storefront in the hero is an original SVG
+(`src/art/Storefront.tsx`), not a photo or the restaurant's logo.
+
+## Adding real dish photos
+
+1. Put the file in `public/photos/` (about 1200×900, JPG or WebP, under 300 KB).
+2. Register it in `src/data/photos.ts` by menu item id, with a credit and `fromRestaurant: true` if it shows Thịnh An's own dish.
+3. Cards, the item sheet and the cart switch from the illustration to the photo automatically.
+
+Only use photos you took, photos the owner supplied or approved, or photos with a reuse license.
+Photos on Google Maps, Yelp and delivery apps belong to whoever uploaded them.

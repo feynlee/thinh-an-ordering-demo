@@ -4,14 +4,20 @@ export default {
   theme: {
     extend: {
       colors: {
-        paper: "#FBF5EA",
-        rice: "#F4EADA",
-        ink: "#2A1F17",
-        muted: "#6E5D4F",
-        chili: { DEFAULT: "#B3332A", dark: "#8F241D", soft: "#F6DCD6" },
-        jade: { DEFAULT: "#1F5A4A", dark: "#163F34", soft: "#DCEAE3" },
-        turmeric: { DEFAULT: "#E0A42B", soft: "#FBEBC8" },
-        line: "#E6D8C3",
+        // Palette taken from the storefront: stucco walls, maroon sign panel,
+        // bright green lettering, green awnings, wood deli counters.
+        paper: "#F8F1E3",
+        rice: "#EFE3CC",
+        ink: "#2B2420",
+        muted: "#6A5D51",
+        chili: { DEFAULT: "#A31F24", dark: "#7A1519", soft: "#F6DCDA" },
+        jade: { DEFAULT: "#22783A", dark: "#17522A", soft: "#DCEED8" },
+        leaf: "#6CC04A",
+        turmeric: { DEFAULT: "#EA9F2F", soft: "#FBEACB" },
+        wood: { DEFAULT: "#8A5A34", dark: "#5C3A1F", soft: "#EBDCC6" },
+        stucco: "#E6D3AE",
+        charcoal: "#2F2C2A",
+        line: "#E3D4BA",
       },
       fontFamily: {
         display: ["Fraunces", "Georgia", "serif"],

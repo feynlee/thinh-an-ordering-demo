@@ -6,6 +6,7 @@ import { usd } from "../lib/money";
 import { openNow, todayHoursLabel } from "../lib/time";
 import { CartDrawer } from "./CartDrawer";
 import { Icon } from "./Icon";
+import { AwningTrim } from "../art/Storefront";
 
 export function DemoBanner() {
   return (
@@ -31,13 +32,15 @@ export function Layout({ children, route }: { children: ReactNode; route: string
   return (
     <div className="min-h-screen flex flex-col">
       <DemoBanner />
-      <header className="sticky top-0 z-30 border-b border-line bg-paper/95 backdrop-blur">
+      <header className="sticky top-0 z-30 bg-paper/95 backdrop-blur">
         <div className="mx-auto max-w-6xl px-4 h-16 flex items-center gap-3">
           <a href="#/" className="flex items-center gap-2.5 min-w-0" aria-label={`${RESTAURANT.name} home`}>
-            <Logo />
-            <span className="min-w-0">
-              <span className="block font-display text-[19px] font-semibold leading-none text-jade-dark truncate">Thịnh An</span>
-              <span className="block text-[11px] tracking-[0.14em] uppercase text-muted">Kitchen & Tofu</span>
+            <span className="flex items-center gap-2 rounded-lg bg-chili pl-1.5 pr-3 py-1 shadow-card ring-2 ring-chili-dark/40">
+              <Logo size={30} />
+              <span className="min-w-0 leading-none">
+                <span className="block font-display text-[19px] font-extrabold text-leaf truncate">Thịnh An</span>
+                <span className="block mt-0.5 text-[9.5px] font-bold tracking-[0.14em] uppercase text-[#FFA06A]">Kitchen & Tofu</span>
+              </span>
             </span>
           </a>
           <nav className="ml-auto hidden md:flex items-center gap-1 text-[15px]">
@@ -64,6 +67,7 @@ export function Layout({ children, route }: { children: ReactNode; route: string
             </button>
           </div>
         </div>
+        <AwningTrim id="awn-head" />
       </header>
 
       <main className="flex-1">{children}</main>
@@ -78,7 +82,8 @@ export function Layout({ children, route }: { children: ReactNode; route: string
         </div>
       )}
 
-      <footer className="mt-16 border-t border-line bg-rice/60">
+      <footer className="mt-16 bg-stucco/50">
+        <AwningTrim id="awn-foot" />
         <div className="mx-auto max-w-6xl px-4 py-10 grid gap-8 sm:grid-cols-3 text-[14px]">
           <div>
             <p className="font-display text-xl text-jade-dark">{RESTAURANT.name}</p>
@@ -93,7 +98,7 @@ export function Layout({ children, route }: { children: ReactNode; route: string
           </div>
           <div className="text-muted">
             <p className="font-semibold text-ink">About this page</p>
-            <p className="mt-2">A proposal concept made by an independent developer and regular customer. Not affiliated with, endorsed by, or operated by {RESTAURANT.nameAscii}. Prices from the restaurant's public Clover menu, checked Nov 18, 2026. Dish images are original illustrations, not photos of the food.</p>
+            <p className="mt-2">A proposal concept made by an independent developer and regular customer. Not affiliated with, endorsed by, or operated by {RESTAURANT.nameAscii}. Prices from the restaurant's public Clover menu, checked Nov 18, 2026. Dish images are original illustrations unless a photo is credited.</p>
           </div>
         </div>
       </footer>
@@ -111,10 +116,10 @@ export function Layout({ children, route }: { children: ReactNode; route: string
 export function Logo({ size = 40 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 64 64" aria-hidden="true" className="shrink-0">
-      <circle cx="32" cy="32" r="30" fill="#1F5A4A" />
-      <path d="M13 33h38a19 19 0 0 1-38 0z" fill="#FBF5EA" />
-      <path d="M21 27c2-6 5-6 7 0M33 25c2-6 5-6 7 0" stroke="#E0A42B" strokeWidth="3" fill="none" strokeLinecap="round" />
-      <path d="M44 14l-10 16M49 17l-12 14" stroke="#FBF5EA" strokeWidth="2.6" strokeLinecap="round" />
+      <circle cx="32" cy="32" r="30" fill="#F8F1E3" />
+      <path d="M13 33h38a19 19 0 0 1-38 0z" fill="#A31F24" />
+      <path d="M24 26c-2-5 3-8 0-13M32 26c-2-5 3-8 0-13" stroke="#22783A" strokeWidth="3" fill="none" strokeLinecap="round" />
+      <path d="M44 14l-10 16M49 17l-12 14" stroke="#A31F24" strokeWidth="2.6" strokeLinecap="round" />
     </svg>
   );
 }

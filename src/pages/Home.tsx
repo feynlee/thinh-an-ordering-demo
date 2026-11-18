@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { MENU, type MenuItem } from "../data/menu";
 import { RESTAURANT } from "../data/restaurant";
-import { DishArt } from "../art/DishArt";
+import { Storefront, AwningTrim } from "../art/Storefront";
+import { DishVisual } from "../components/DishVisual";
+import { findItem } from "../data/menu";
 import { DishCard } from "../components/DishCard";
 import { ItemSheet } from "../components/ItemSheet";
 import { Icon } from "../components/Icon";
@@ -13,13 +15,14 @@ export function Home() {
   const [open, setOpen] = useState<MenuItem | null>(null);
   const popular = MENU.filter((m) => m.popular).slice(0, 8);
   const isOpen = openNow();
+  const pho = findItem("17-pho-dac-biet");
 
   return (
     <>
       {/* Hero */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,#FBEBC8,transparent_60%),radial-gradient(ellipse_at_bottom_left,#DCEAE3,transparent_55%)]" />
-        <div className="mx-auto max-w-6xl px-4 pt-10 pb-12 md:pt-16 md:pb-20 grid md:grid-cols-[1.05fr_1fr] gap-10 items-center">
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,#FBEACB,transparent_60%),radial-gradient(ellipse_at_bottom_left,#DCEED8,transparent_55%)]" />
+        <div className="mx-auto max-w-6xl px-4 pt-5 pb-12 md:pt-16 md:pb-20 grid md:grid-cols-[1.05fr_1fr] gap-6 md:gap-10 items-center">
           <div>
             <p className="inline-flex items-center gap-2 rounded-full bg-white/80 border border-line px-3 py-1 text-[13px] font-medium">
               <span className={`w-2 h-2 rounded-full ${isOpen ? "bg-jade" : "bg-chili"}`} />
@@ -32,7 +35,7 @@ export function Home() {
               Order ahead from {RESTAURANT.nameAscii} on West Waters Ave. Skip the phone call, choose a pickup time, and walk in to a hot bowl.
             </p>
             <div className="mt-7 flex flex-col sm:flex-row gap-3">
-              <a href="#/order" className="h-14 px-7 rounded-2xl bg-chili hover:bg-chili-dark text-paper font-semibold text-[17px] inline-flex items-center justify-center gap-2 shadow-card">
+              <a href="#/order" className="h-14 px-7 rounded-2xl bg-jade hover:bg-jade-dark text-paper font-semibold text-[17px] inline-flex items-center justify-center gap-2 shadow-card">
                 {t("Order pickup")} <Icon name="arrow" />
               </a>
               <a href={RESTAURANT.phoneHref} className="h-14 px-6 rounded-2xl border border-line bg-white hover:bg-rice font-semibold inline-flex items-center justify-center gap-2">
@@ -46,23 +49,21 @@ export function Home() {
                 ["$0", "service fees"],
               ].map(([a, b]) => (
                 <div key={b} className="rounded-2xl bg-white/80 border border-line py-3">
-                  <dt className="font-display text-2xl text-jade-dark">{a}</dt>
+                  <dt className="font-display text-2xl text-chili">{a}</dt>
                   <dd className="text-[12px] text-muted">{b}</dd>
                 </div>
               ))}
             </dl>
           </div>
-          <div className="relative h-[340px] sm:h-[420px]">
-            <div className="absolute right-0 top-0 w-[78%] rotate-2 rounded-[32px] overflow-hidden shadow-lift ring-8 ring-white">
-              <DishArt kind="pho-special" className="w-full h-[250px] sm:h-[300px]" title="Phở Đặc Biệt" />
+          <div className="relative md:pb-8 order-first md:order-none">
+            <div className="rounded-[28px] overflow-hidden shadow-lift ring-[6px] ring-white">
+              <Storefront className="block w-full h-auto" />
             </div>
-            <div className="absolute left-0 bottom-4 w-[52%] -rotate-3 rounded-[28px] overflow-hidden shadow-lift ring-8 ring-white">
-              <DishArt kind="banh-mi" className="w-full h-[150px] sm:h-[180px]" title="Bánh Mì Đặc Biệt" />
+            <div className="hidden md:block absolute -left-8 bottom-0 w-[42%] rounded-2xl overflow-hidden shadow-lift ring-4 ring-white -rotate-3 bg-white">
+              {pho && <DishVisual item={pho} className="w-full h-[96px] sm:h-[130px]" />}
+              <p className="px-3 py-2 text-[12px] font-semibold leading-tight"><span className="text-chili">#17</span> Phở Đặc Biệt</p>
             </div>
-            <div className="absolute right-6 bottom-0 w-[34%] rotate-6 rounded-[24px] overflow-hidden shadow-lift ring-8 ring-white">
-              <DishArt kind="thai-tea" className="w-full h-[140px] sm:h-[170px]" title="Thai tea" />
-            </div>
-            <p className="absolute -bottom-7 right-0 text-[11px] text-muted">Original illustrations, not photos of the restaurant's food.</p>
+            <p className="mt-2 md:mt-3 md:pl-[44%] text-right text-[11px] text-muted">Illustration of the storefront on W Waters Ave, drawn for this demo.</p>
           </div>
         </div>
       </section>
@@ -119,6 +120,38 @@ export function Home() {
               </li>
             ))}
           </ol>
+        </div>
+      </section>
+
+      {/* Deli counter */}
+      <section className="mx-auto max-w-6xl px-4 mt-16">
+        <div className="relative rounded-[32px] overflow-hidden bg-wood text-paper">
+          <div className="absolute inset-0 opacity-[.18] bg-[repeating-linear-gradient(90deg,transparent_0_46px,#000_46px_48px)]" aria-hidden="true" />
+          <div className="relative grid md:grid-cols-[1.1fr_1fr] gap-8 p-7 sm:p-10 items-center">
+            <div>
+              <p className="text-[13px] font-semibold uppercase tracking-[0.16em] text-turmeric">Inside the store</p>
+              <h2 className="font-display text-3xl sm:text-4xl mt-1">A kitchen and a deli counter</h2>
+              <p className="mt-3 text-paper/85 max-w-md">
+                Past the hot kitchen there's a long wooden counter of grab-and-go food: house-made tofu, packed meals, snacks and desserts.
+                Hot dishes can be ordered ahead here. Counter items are picked up in the store.
+              </p>
+              <p className="mt-4 text-[12px] text-paper/70">Based on public photos of the store. The owner would confirm what's on the counter and whether any of it can be ordered online.</p>
+            </div>
+            <ul className="grid grid-cols-2 gap-3">
+              {[
+                ["Đậu hũ", "Fresh tofu, made in-house"],
+                ["Món ăn sẵn", "Ready-made meals to go"],
+                ["Chè", "Sweet soups & desserts"],
+                ["Bánh", "Snacks & rice cakes"],
+              ].map(([vi, en]) => (
+                <li key={vi} className="rounded-2xl bg-paper text-ink p-4 shadow-card">
+                  <p className="font-display text-xl text-chili">{vi}</p>
+                  <p className="text-[13px] text-muted mt-0.5">{en}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <AwningTrim id="awn-deli" />
         </div>
       </section>
 
@@ -192,9 +225,9 @@ function MapArt() {
       <rect x="300" y="0" width="16" height="320" fill="#FFFFFF" />
       <rect x="470" y="0" width="12" height="320" fill="#FFFFFF" />
       <text x="330" y="133" fontSize="13" fill="#6E5D4F" fontFamily="Be Vietnam Pro, sans-serif">W Waters Ave</text>
-      <circle cx="240" cy="182" r="40" fill="#B3332A" opacity=".12" />
-      <path d="M240 150c-14 0-24 10-24 24 0 18 24 38 24 38s24-20 24-38c0-14-10-24-24-24z" fill="#B3332A" />
-      <circle cx="240" cy="174" r="8" fill="#FBF5EA" />
+      <circle cx="240" cy="182" r="40" fill="#A31F24" opacity=".12" />
+      <path d="M240 150c-14 0-24 10-24 24 0 18 24 38 24 38s24-20 24-38c0-14-10-24-24-24z" fill="#A31F24" />
+      <circle cx="240" cy="174" r="8" fill="#F8F1E3" />
     </svg>
   );
 }

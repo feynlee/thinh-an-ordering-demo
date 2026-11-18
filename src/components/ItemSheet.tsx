@@ -3,7 +3,7 @@ import { MODIFIER_GROUPS, type MenuItem } from "../data/menu";
 import { useStore, lineUnitPrice, type CartLine } from "../lib/store";
 import { useT } from "../lib/i18n";
 import { usd } from "../lib/money";
-import { DishArt } from "../art/DishArt";
+import { DishVisual } from "./DishVisual";
 import { Icon } from "./Icon";
 import { DietaryTags } from "./DishCard";
 
@@ -63,8 +63,7 @@ export function ItemSheet({ item, onClose, editLine }: { item: MenuItem; onClose
         className="fixed z-50 inset-x-0 bottom-0 max-h-[92vh] sm:inset-auto sm:left-1/2 sm:top-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 sm:w-[560px] sm:max-h-[88vh] bg-paper rounded-t-3xl sm:rounded-3xl shadow-lift flex flex-col overflow-hidden outline-none"
       >
         <div className="relative shrink-0">
-          <DishArt kind={item.art} className="w-full h-44 sm:h-56" title={item.nameEn} />
-          <span className="absolute left-3 bottom-3 rounded-full bg-paper/90 px-2.5 py-1 text-[11px] font-medium text-muted">Illustration · not a photo of the dish</span>
+          <DishVisual item={item} label className="w-full h-44 sm:h-56" />
           <button onClick={onClose} className="absolute right-3 top-3 w-10 h-10 rounded-full bg-paper/95 grid place-items-center shadow-card" aria-label="Close"><Icon name="close" /></button>
         </div>
         <div className="overflow-y-auto px-5 pt-4 pb-2">

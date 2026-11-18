@@ -59,8 +59,8 @@ function Bowl({ broth, children }: { broth: string; children?: React.ReactNode }
     <g>
       <ellipse cx="160" cy="178" rx="112" ry="20" fill="#000" opacity=".08" />
       <circle cx="160" cy="125" r="104" fill="#FFFFFF" />
-      <circle cx="160" cy="125" r="104" fill="none" stroke="#1F5A4A" strokeWidth="5" />
-      <circle cx="160" cy="125" r="92" fill="none" stroke="#1F5A4A" strokeWidth="1.5" strokeDasharray="2 6" />
+      <circle cx="160" cy="125" r="104" fill="none" stroke="#22783A" strokeWidth="5" />
+      <circle cx="160" cy="125" r="92" fill="none" stroke="#22783A" strokeWidth="1.5" strokeDasharray="2 6" />
       <circle cx="160" cy="125" r="84" fill={broth} />
       <ellipse cx="128" cy="92" rx="26" ry="8" fill="#fff" opacity=".22" transform="rotate(-25 128 92)" />
       {children}
@@ -83,8 +83,8 @@ function Plate({ children }: { children?: React.ReactNode }) {
     <g>
       <ellipse cx="160" cy="182" rx="120" ry="18" fill="#000" opacity=".08" />
       <ellipse cx="160" cy="125" rx="128" ry="92" fill="#FFFFFF" />
-      <ellipse cx="160" cy="125" rx="128" ry="92" fill="none" stroke="#B3332A" strokeWidth="4" />
-      <ellipse cx="160" cy="125" rx="114" ry="80" fill="none" stroke="#B3332A" strokeWidth="1.2" strokeDasharray="3 6" />
+      <ellipse cx="160" cy="125" rx="128" ry="92" fill="none" stroke="#A31F24" strokeWidth="4" />
+      <ellipse cx="160" cy="125" rx="114" ry="80" fill="none" stroke="#A31F24" strokeWidth="1.2" strokeDasharray="3 6" />
       {children}
     </g>
   );
@@ -116,7 +116,7 @@ function Cup({ fill, topping = "#3B2418", boba = true }: { fill: string; topping
   return (
     <g>
       <ellipse cx="160" cy="214" rx="52" ry="8" fill="#000" opacity=".08" />
-      <rect x="150" y="10" width="12" height="80" rx="4" fill="#1F5A4A" transform="rotate(10 156 50)" />
+      <rect x="150" y="10" width="12" height="80" rx="4" fill="#22783A" transform="rotate(10 156 50)" />
       <path d="M104 64h112l-12 146a10 10 0 0 1-10 9h-68a10 10 0 0 1-10-9z" fill="#ffffff" opacity=".65" />
       <path d="M108 84h104l-10 124a8 8 0 0 1-8 7h-68a8 8 0 0 1-8-7z" fill={fill} />
       {boba && Array.from({ length: 12 }).map((_, i) => (
@@ -313,7 +313,7 @@ function scene(kind: ArtKind): { bg: string; body: React.ReactNode } {
             <path d="M120 72h80l-2 38h-76z" fill="#6DBE6E" />
             <path d="M114 46h92l-2 26h-88z" fill="#FFF7EC" />
             {Array.from({ length: 10 }).map((_, i) => <circle key={i} cx={126 + ((i * 17) % 70)} cy={56 + ((i * 7) % 12)} r="3" fill="#D5E9F7" opacity=".9" />)}
-            <rect x="170" y="8" width="10" height="70" rx="4" fill="#B3332A" transform="rotate(12 175 40)" />
+            <rect x="170" y="8" width="10" height="70" rx="4" fill="#A31F24" transform="rotate(12 175 40)" />
           </g>
         ),
       };

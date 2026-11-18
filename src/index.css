@@ -4,7 +4,7 @@
 
 html { -webkit-text-size-adjust: 100%; }
 body { @apply bg-paper text-ink font-sans antialiased; }
-:focus-visible { outline: 3px solid #E0A42B; outline-offset: 2px; }
+:focus-visible { outline: 3px solid #EA9F2F; outline-offset: 2px; }
 .no-scrollbar { scrollbar-width: none; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
 @media (prefers-reduced-motion: reduce) {
