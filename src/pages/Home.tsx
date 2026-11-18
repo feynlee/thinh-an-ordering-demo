@@ -76,7 +76,7 @@ export function Home() {
             <span><span className="block font-semibold">{RESTAURANT.address1}</span><span className="text-muted text-[13px]">{RESTAURANT.address2} · {t("Directions")}</span></span>
           </a>
           <div className="flex items-center gap-3 p-2">
-            <span className="w-10 h-10 rounded-full bg-turmeric-soft text-[#9A6A0D] grid place-items-center"><Icon name="clock" /></span>
+            <span className="w-10 h-10 rounded-full bg-teal-soft text-teal-dark grid place-items-center"><Icon name="clock" /></span>
             <span><span className="block font-semibold">Today · {todayHoursLabel()}</span><span className="text-muted text-[13px]">Closed Tuesdays · online orders until 8:30 PM</span></span>
           </div>
           <a href={RESTAURANT.phoneHref} className="flex items-center gap-3 rounded-2xl hover:bg-rice p-2">
@@ -114,7 +114,7 @@ export function Home() {
               ["3", "Walk in & pick up", "Pay online, or at the counter if the restaurant enables it."],
             ].map(([n, a, b]) => (
               <li key={n} className="rounded-2xl bg-white/10 p-5">
-                <span className="w-9 h-9 rounded-full bg-turmeric text-ink font-bold grid place-items-center">{n}</span>
+                <span className="w-9 h-9 rounded-full bg-leaf text-ink font-bold grid place-items-center">{n}</span>
                 <p className="mt-3 font-semibold text-[17px]">{a}</p>
                 <p className="mt-1 text-[14px] text-paper/75">{b}</p>
               </li>
@@ -129,7 +129,7 @@ export function Home() {
           <div className="absolute inset-0 opacity-[.18] bg-[repeating-linear-gradient(90deg,transparent_0_46px,#000_46px_48px)]" aria-hidden="true" />
           <div className="relative grid md:grid-cols-[1.1fr_1fr] gap-8 p-7 sm:p-10 items-center">
             <div>
-              <p className="text-[13px] font-semibold uppercase tracking-[0.16em] text-turmeric">Inside the store</p>
+              <p className="text-[13px] font-semibold uppercase tracking-[0.16em] text-leaf">Inside the store</p>
               <h2 className="font-display text-3xl sm:text-4xl mt-1">A kitchen and a deli counter</h2>
               <p className="mt-3 text-paper/85 max-w-md">
                 Past the hot kitchen there's a long wooden counter of grab-and-go food: house-made tofu, packed meals, snacks and desserts.
@@ -167,12 +167,12 @@ export function Home() {
           </p>
           <p className="mt-3 text-[13px] text-muted">Placeholder copy. The owner would write or approve the real story.</p>
         </div>
-        <div className="rounded-[28px] bg-turmeric-soft p-7 sm:p-9 flex flex-col">
-          <p className="text-[13px] font-semibold uppercase tracking-[0.16em] text-[#9A6A0D]">Catering & large orders</p>
+        <div className="rounded-[28px] bg-teal-soft p-7 sm:p-9 flex flex-col">
+          <p className="text-[13px] font-semibold uppercase tracking-[0.16em] text-teal-dark">Catering & large orders</p>
           <h2 className="font-display text-3xl text-jade-dark mt-1">Feeding a crowd?</h2>
           <p className="mt-3 text-muted">The restaurant's menu lists catering by the pound (BBQ pork, grilled beef short ribs, roasted Cornish hen) and whole roasted duck. Call ahead for party trays.</p>
           <div className="mt-auto pt-5 flex flex-wrap gap-3">
-            <a href={RESTAURANT.phoneHref} className="h-12 px-5 rounded-2xl bg-jade text-paper font-semibold inline-flex items-center gap-2"><Icon name="phone" /> Call about catering</a>
+            <a href={RESTAURANT.phoneHref} className="h-12 px-5 rounded-2xl bg-teal-dark text-paper font-semibold inline-flex items-center gap-2"><Icon name="phone" /> Call about catering</a>
           </div>
         </div>
       </section>
@@ -225,9 +225,9 @@ function MapArt() {
       <rect x="300" y="0" width="16" height="320" fill="#FFFFFF" />
       <rect x="470" y="0" width="12" height="320" fill="#FFFFFF" />
       <text x="330" y="133" fontSize="13" fill="#6E5D4F" fontFamily="Be Vietnam Pro, sans-serif">W Waters Ave</text>
-      <circle cx="240" cy="182" r="40" fill="#A31F24" opacity=".12" />
-      <path d="M240 150c-14 0-24 10-24 24 0 18 24 38 24 38s24-20 24-38c0-14-10-24-24-24z" fill="#A31F24" />
-      <circle cx="240" cy="174" r="8" fill="#F8F1E3" />
+      <circle cx="240" cy="182" r="40" fill="#CF2229" opacity=".12" />
+      <path d="M240 150c-14 0-24 10-24 24 0 18 24 38 24 38s24-20 24-38c0-14-10-24-24-24z" fill="#CF2229" />
+      <circle cx="240" cy="174" r="8" fill="#FBF6EA" />
     </svg>
   );
 }

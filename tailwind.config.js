@@ -4,20 +4,22 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Palette taken from the storefront: stucco walls, maroon sign panel,
-        // bright green lettering, green awnings, wood deli counters.
-        paper: "#F8F1E3",
-        rice: "#EFE3CC",
-        ink: "#2B2420",
-        muted: "#6A5D51",
-        chili: { DEFAULT: "#A31F24", dark: "#7A1519", soft: "#F6DCDA" },
-        jade: { DEFAULT: "#22783A", dark: "#17522A", soft: "#DCEED8" },
-        leaf: "#6CC04A",
-        turmeric: { DEFAULT: "#EA9F2F", soft: "#FBEACB" },
-        wood: { DEFAULT: "#8A5A34", dark: "#5C3A1F", soft: "#EBDCC6" },
-        stucco: "#E6D3AE",
+        // Palette sampled from the restaurant's sign and storefront:
+        // green "Thịnh An" lettering, red "Kitchen & Tofu", white bowl mark,
+        // teal awnings with a lime leaf, and the cream stucco wall.
+        paper: "#FBF6EA",
+        rice: "#F2E8D0",
+        ink: "#26231F",
+        muted: "#655C50",
+        chili: { DEFAULT: "#CF2229", dark: "#A3171D", soft: "#FBE2E0" },
+        jade: { DEFAULT: "#23843D", dark: "#17602B", soft: "#E0F1DB" },
+        leaf: "#8DC63F",
+        teal: { DEFAULT: "#13897A", dark: "#0D6B5F", soft: "#D7EFEA" },
+        turmeric: { DEFAULT: "#E9A43A", soft: "#FBEBCD" },
+        wood: { DEFAULT: "#8E6A45", dark: "#5F4528", soft: "#EDE0CB" },
+        stucco: "#EADCB6",
         charcoal: "#2F2C2A",
-        line: "#E3D4BA",
+        line: "#E6D9BD",
       },
       fontFamily: {
         display: ["Fraunces", "Georgia", "serif"],

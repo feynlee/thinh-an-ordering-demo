@@ -35,12 +35,10 @@ export function Layout({ children, route }: { children: ReactNode; route: string
       <header className="sticky top-0 z-30 bg-paper/95 backdrop-blur">
         <div className="mx-auto max-w-6xl px-4 h-16 flex items-center gap-3">
           <a href="#/" className="flex items-center gap-2.5 min-w-0" aria-label={`${RESTAURANT.name} home`}>
-            <span className="flex items-center gap-2 rounded-lg bg-chili pl-1.5 pr-3 py-1 shadow-card ring-2 ring-chili-dark/40">
-              <Logo size={30} />
-              <span className="min-w-0 leading-none">
-                <span className="block font-display text-[19px] font-extrabold text-leaf truncate">Thịnh An</span>
-                <span className="block mt-0.5 text-[9.5px] font-bold tracking-[0.14em] uppercase text-[#FFA06A]">Kitchen & Tofu</span>
-              </span>
+            <Logo size={38} />
+            <span className="min-w-0 leading-none">
+              <span className="block font-display text-[21px] font-extrabold text-jade truncate">Thịnh An</span>
+              <span className="block mt-0.5 font-display text-[13px] font-extrabold text-chili">Kitchen & Tofu</span>
             </span>
           </a>
           <nav className="ml-auto hidden md:flex items-center gap-1 text-[15px]">
@@ -116,10 +114,12 @@ export function Layout({ children, route }: { children: ReactNode; route: string
 export function Logo({ size = 40 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 64 64" aria-hidden="true" className="shrink-0">
-      <circle cx="32" cy="32" r="30" fill="#F8F1E3" />
-      <path d="M13 33h38a19 19 0 0 1-38 0z" fill="#A31F24" />
-      <path d="M24 26c-2-5 3-8 0-13M32 26c-2-5 3-8 0-13" stroke="#22783A" strokeWidth="3" fill="none" strokeLinecap="round" />
-      <path d="M44 14l-10 16M49 17l-12 14" stroke="#A31F24" strokeWidth="2.6" strokeLinecap="round" />
+      <circle cx="32" cy="32" r="30" fill="#FFFFFF" stroke="#E6D9BD" strokeWidth="2" />
+      <path d="M11 34h42a21 17 0 0 1-42 0z" fill="#FFFFFF" stroke="#CF2229" strokeWidth="3.2" strokeLinejoin="round" />
+      <path d="M16 40h32" stroke="#CF2229" strokeWidth="2.4" strokeLinecap="round" />
+      <path d="M27 31c-8-8-4-17 6-19c2 8-1 15-6 19z" fill="#23843D" />
+      <path d="M27 31c1-6 3-10 6-15" stroke="#FFFFFF" strokeWidth="1.4" fill="none" strokeLinecap="round" />
+      <path d="M46 12l-9 18M51 15l-11 16" stroke="#26231F" strokeWidth="2.4" strokeLinecap="round" />
     </svg>
   );
 }

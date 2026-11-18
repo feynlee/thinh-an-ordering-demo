@@ -7,14 +7,14 @@ export function AwningTrim({ className = "", id = "awn" }: { className?: string;
     <svg className={`block w-full h-[18px] ${className}`} preserveAspectRatio="none" aria-hidden="true">
       <defs>
         <pattern id={id} width="28" height="18" patternUnits="userSpaceOnUse">
-          <rect x="0" y="0" width="14" height="11" fill="#22783A" />
-          <rect x="14" y="0" width="14" height="11" fill="#33A355" />
-          <path d="M0 11h14a7 7 0 0 1-14 0z" fill="#22783A" />
-          <path d="M14 11h14a7 7 0 0 1-14 0z" fill="#33A355" />
+          <rect x="0" y="0" width="14" height="11" fill="#13897A" />
+          <rect x="14" y="0" width="14" height="11" fill="#1A9B8A" />
+          <path d="M0 11h14a7 7 0 0 1-14 0z" fill="#13897A" />
+          <path d="M14 11h14a7 7 0 0 1-14 0z" fill="#1A9B8A" />
         </pattern>
       </defs>
       <rect width="100%" height="18" fill={`url(#${id})`} />
-      <rect width="100%" height="2" fill="#17522A" />
+      <rect width="100%" height="2" fill="#0D6B5F" />
     </svg>
   );
 }
@@ -39,19 +39,18 @@ function SideAwning({ x, w }: { x: number; w: number }) {
   const sw = w / n;
   return (
     <g>
-      <path d={`M${x} 196 L${x + w} 196 L${x + w + 10} 238 L${x - 10} 238 Z`} fill="#22783A" />
+      <path d={`M${x} 196 L${x + w} 196 L${x + w + 10} 238 L${x - 10} 238 Z`} fill="#13897A" />
       {Array.from({ length: n }).map((_, i) =>
         i % 2 ? null : (
-          <path key={i} d={`M${x + i * sw} 196 L${x + (i + 1) * sw} 196 L${x - 10 + (i + 1) * ((w + 20) / n)} 238 L${x - 10 + i * ((w + 20) / n)} 238 Z`} fill="#2C8C47" />
+          <path key={i} d={`M${x + i * sw} 196 L${x + (i + 1) * sw} 196 L${x - 10 + (i + 1) * ((w + 20) / n)} 238 L${x - 10 + i * ((w + 20) / n)} 238 Z`} fill="#1A9B8A" />
         ),
       )}
       {Array.from({ length: n }).map((_, i) => (
-        <path key={`s${i}`} d={`M${x - 10 + i * ((w + 20) / n)} 238 a${(w + 20) / n / 2} 7 0 0 0 ${(w + 20) / n} 0z`} fill="#1C6A33" />
+        <path key={`s${i}`} d={`M${x - 10 + i * ((w + 20) / n)} 238 a${(w + 20) / n / 2} 7 0 0 0 ${(w + 20) / n} 0z`} fill="#0D6B5F" />
       ))}
       {/* leaf-and-bowl motif, simplified */}
-      <g transform={`translate(${x + w / 2} 217)`} fill="none" stroke="#F8F1E3" strokeWidth="2.4" strokeLinecap="round">
-        <path d="M-12 0h24a12 9 0 0 1-24 0z" fill="#F8F1E3" stroke="none" />
-        <path d="M-3 -4c-6-8-2-14 6-16c2 7-1 13-6 16z" fill="#6CC04A" stroke="none" />
+      <g transform={`translate(${x + w / 2} 217)`} fill="none" stroke="#FBF6EA" strokeWidth="2.4" strokeLinecap="round">
+                <path d="M-2 6c-10-6-8-18 6-22c3 10 0 18-6 22z" fill="#8DC63F" stroke="none" /><path d="M-2 6c2-6 4-11 8-16" stroke="#0D6B5F" strokeWidth="1.4" />
       </g>
     </g>
   );
@@ -87,21 +86,19 @@ export function Storefront({ className = "" }: { className?: string }) {
       {/* center tower */}
       <rect x="214" y="78" width="172" height="282" fill="#EAD9B6" />
       <rect x="208" y="70" width="184" height="14" fill="#D8C29A" />
-      <rect x="226" y="92" width="148" height="96" rx="6" fill="#8E1A1F" />
-      <rect x="230" y="96" width="140" height="88" rx="4" fill="#A31F24" />
-      {/* bowl icon */}
-      <g transform="translate(250 116)">
-        <circle r="11" fill="#F8F1E3" />
-        <path d="M-7 0h14a7 6 0 0 1-14 0z" fill="#A31F24" />
-        <path d="M-3 -3c-1-3 1-4 0-7M2 -3c-1-3 1-4 0-7" stroke="#A31F24" strokeWidth="1.6" fill="none" strokeLinecap="round" />
+      {/* channel-letter sign on the stucco, like the real one */}
+      <g transform="translate(236 104)">
+        <path d="M-9 0h18a9 8 0 0 1-18 0z" fill="#FFFFFF" stroke="#CF2229" strokeWidth="2" />
+        <path d="M-1 -2c-4-6-1-11 5-12c1 5-1 10-5 12z" fill="#23843D" />
+        <path d="M6 -14l-9 12M10 -12l-10 11" stroke="#26231F" strokeWidth="1.4" strokeLinecap="round" />
       </g>
-      <text x="314" y="123" textAnchor="middle" fontFamily="Fraunces, Georgia, serif" fontWeight="800" fontSize="20" fill="#6CC04A">Thịnh An</text>
-      <text x="300" y="150" textAnchor="middle" fontFamily="Fraunces, Georgia, serif" fontWeight="600" fontSize="17" fill="#FF8A4C">Kitchen &amp; Tofu</text>
-      <rect x="230" y="160" width="140" height="20" fill="#7A1519" />
-      <text x="300" y="174" textAnchor="middle" fontFamily="'Be Vietnam Pro', sans-serif" fontWeight="700" fontSize="10" letterSpacing="1.6" fill="#F8F1E3">VIETNAMESE CUISINE</text>
+      <text x="312" y="114" textAnchor="middle" fontFamily="Fraunces, Georgia, serif" fontWeight="800" fontSize="25" fill="#23843D" stroke="#FFFFFF" strokeWidth="3" paintOrder="stroke">Thịnh An</text>
+      <text x="300" y="142" textAnchor="middle" fontFamily="Fraunces, Georgia, serif" fontWeight="800" fontSize="20" fill="#CF2229" stroke="#FFFFFF" strokeWidth="2.5" paintOrder="stroke">Kitchen &amp; Tofu</text>
+      <text x="300" y="164" textAnchor="middle" fontFamily="'Be Vietnam Pro', sans-serif" fontWeight="700" fontSize="11.5" letterSpacing="0.8" fill="#FFFFFF" stroke="#5A4E44" strokeWidth="2.2" strokeLinejoin="round" paintOrder="stroke">VIETNAMESE CUISINE</text>
 
       {/* pilasters */}
       {[44, 206, 386, 548].map((x) => <rect key={x} x={x} y="160" width="8" height="200" fill="#D8C29A" />)}
+      {[236, 352].map((x) => <rect key={`st${x}`} x={x} y="300" width="12" height="58" fill="#A88A64" />)}
 
       {/* windows */}
       <rect x="64" y="238" width="132" height="110" fill="url(#sf-glass)" />
@@ -117,8 +114,8 @@ export function Storefront({ className = "" }: { className?: string }) {
       <rect x="298" y="218" width="4" height="142" fill="#CDB68C" />
       <rect x="287" y="282" width="3" height="22" rx="1.5" fill="#D9D9D9" />
       <rect x="310" y="282" width="3" height="22" rx="1.5" fill="#D9D9D9" />
-      <rect x="258" y="226" width="34" height="18" rx="3" fill="#F8F1E3" opacity=".9" />
-      <text x="275" y="238.5" textAnchor="middle" fontFamily="'Be Vietnam Pro', sans-serif" fontWeight="800" fontSize="8" fill="#A31F24">OPEN</text>
+      <rect x="258" y="226" width="34" height="18" rx="3" fill="#FBF6EA" opacity=".9" />
+      <text x="275" y="238.5" textAnchor="middle" fontFamily="'Be Vietnam Pro', sans-serif" fontWeight="800" fontSize="8" fill="#CF2229">OPEN</text>
 
       {/* planters + ground */}
       <rect x="0" y="358" width="600" height="42" fill="#C9C2B4" />
