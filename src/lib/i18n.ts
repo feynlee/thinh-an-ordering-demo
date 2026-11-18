@@ -1,0 +1,57 @@
+import { useStore } from "./store";
+
+/** Interface strings. Vietnamese is a draft translation; ask the owner's family/staff to review it. */
+const VI: Record<string, string> = {
+  "Order pickup": "Đặt món mang về",
+  "Order pickup now": "Đặt món mang về ngay",
+  "Menu": "Thực đơn",
+  "Kitchen view": "Màn hình bếp",
+  "About this demo": "Về bản demo",
+  "Your order": "Đơn của bạn",
+  "Checkout": "Thanh toán",
+  "Add to order": "Thêm vào đơn",
+  "Update item": "Cập nhật món",
+  "Search dishes": "Tìm món",
+  "Popular": "Món được yêu thích",
+  "All": "Tất cả",
+  "Required": "Bắt buộc",
+  "Optional": "Tùy chọn",
+  "Special instructions": "Ghi chú cho bếp",
+  "Subtotal": "Tạm tính",
+  "Tax": "Thuế",
+  "Tip": "Tiền tip",
+  "Total": "Tổng cộng",
+  "Pickup time": "Giờ lấy món",
+  "ASAP": "Sớm nhất",
+  "Schedule": "Hẹn giờ",
+  "Your details": "Thông tin của bạn",
+  "Name": "Tên",
+  "Phone": "Số điện thoại",
+  "Email (optional)": "Email (không bắt buộc)",
+  "Payment": "Thanh toán",
+  "Pay online": "Trả trước online",
+  "Pay at pickup": "Trả khi lấy món",
+  "Review order": "Xem lại đơn",
+  "Place demo order": "Đặt đơn demo",
+  "Your cart is empty": "Giỏ hàng trống",
+  "Browse the menu": "Xem thực đơn",
+  "Call": "Gọi",
+  "Directions": "Chỉ đường",
+  "Hours": "Giờ mở cửa",
+  "Closed": "Đóng cửa",
+  "Vegetarian": "Chay",
+  "Spicy": "Cay",
+  "Continue": "Tiếp tục",
+  "Back": "Quay lại",
+  "Received": "Đã nhận",
+  "Preparing": "Đang làm",
+  "Ready for pickup": "Sẵn sàng",
+  "Picked up": "Đã lấy",
+  "Order more": "Đặt thêm",
+  "No tip": "Không tip",
+};
+
+export function useT() {
+  const { lang } = useStore();
+  return (s: string) => (lang === "vi" ? VI[s] ?? s : s);
+}
