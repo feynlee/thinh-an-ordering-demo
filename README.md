@@ -20,7 +20,7 @@ Also: English / Tiếng Việt toggle for the interface (draft translation), car
 
 ## Data
 
-- `src/data/menu.ts` — 25-dish sample. Numbers, names, descriptions and prices copied from the restaurant's public Clover Online Ordering page on 2026-11-18, cross-checked with order.online. Each item carries `sourceUrl`, `lastChecked` and per-field `verification` flags. Vietnamese tone-mark spellings are editorial and need owner review.
+- `src/data/menu.ts` — 25 hand-curated dishes with detailed options; `src/data/fullMenu.ts` adds the rest of the Clover menu (178 items in total; beer, wine and $0.00 items left out). Numbers, names, descriptions and prices copied from the restaurant's public Clover Online Ordering page on 2026-11-18, cross-checked with order.online. Each item carries `sourceUrl`, `lastChecked` and per-field `verification` flags. Vietnamese tone-mark spellings are editorial and need owner review.
 - `docs/menu-sample.json` — the same dataset as JSON (`npm run menu:json` regenerates it).
 - `src/data/restaurant.ts` — address, phone, hours, tax rate (7.5%, matching Clover checkout), with notes on where each came from.
 - In production, Clover inventory is the source of truth.
@@ -40,7 +40,7 @@ npm run build      # outputs dist/
 ## Deploy to GitHub Pages
 
 1. Push this repo to GitHub (public repo for free Pages).
-2. Repo **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+2. Every push to `main` builds the site and publishes it to the `gh-pages` branch (`.github/workflows/deploy.yml`). Pages serves that branch: **Settings → Pages → Source: Deploy from a branch → gh-pages / (root)**.
 3. Push to `main`. `.github/workflows/deploy.yml` builds and publishes `dist/`.
 4. The site appears at `https://<user>.github.io/<repo>/`. Routes use `#/…`, so no server rewrites are needed. `vite.config.ts` uses a relative `base`, so any repo name works.
 
@@ -54,11 +54,9 @@ The palette comes from the storefront: stucco cream, the maroon sign panel with 
 green striped awnings, and the wood deli counter (`tailwind.config.js`). The storefront in the hero is an original SVG
 (`src/art/Storefront.tsx`), not a photo or the restaurant's logo.
 
-## Adding real dish photos
+## Dish photos
 
-1. Put the file in `public/photos/` (about 1200×900, JPG or WebP, under 300 KB).
-2. Register it in `src/data/photos.ts` by menu item id, with a credit and `fromRestaurant: true` if it shows Thịnh An's own dish.
-3. Cards, the item sheet and the cart switch from the illustration to the photo automatically.
-
-Only use photos you took, photos the owner supplied or approved, or photos with a reuse license.
-Photos on Google Maps, Yelp and delivery apps belong to whoever uploaded them.
+`src/data/photos.ts` maps menu items to photos from the restaurant's public Google Maps listing (collected 2026-11-19).
+Most are studio shots posted by the business account; the rest are customer photos, matched to a dish by how it looks.
+They are hotlinked and credited on each dish, not copied into this repo. If one stops loading, the dish falls back to its illustration.
+Before any public launch, replace them with photos the owner provides or approves.
