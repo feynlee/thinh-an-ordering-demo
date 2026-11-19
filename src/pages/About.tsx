@@ -15,13 +15,13 @@ export function About() {
           <li>✔︎ <strong>No real orders.</strong> “Orders” are saved only in your browser (localStorage) and are numbered <code>DEMO-xxxx</code>.</li>
           <li>✔︎ <strong>No payments.</strong> The payment step is a simulated handoff with no card fields.</li>
           <li>✔︎ <strong>No Clover connection.</strong> The site makes no calls to Clover or any backend, and holds no credentials.</li>
-          <li>✔︎ <strong>No borrowed photos.</strong> Dish images are original illustrations drawn for this demo, and the storefront is an illustration too. A real photo appears only when it is credited on the dish and we have the right to use it. The colors echo the storefront sign; the bowl mark is a placeholder, not the restaurant's logo.</li>
+          <li>✔︎ <strong>Photos are the restaurant's own public ones.</strong> Dish and store photos load from the restaurant's Google Maps listing: studio shots posted by the business, plus some customer photos, each credited. They are not copied into this site. A dish without a photo shows an original illustration. Before any public launch they'd be replaced with photos the owner provides or approves.</li>
           <li>✔︎ <strong>Not indexed.</strong> Pages are marked <code>noindex</code> so customers don't find this instead of the real ordering page.</li>
         </ul>
         <h2 className="font-display text-2xl text-jade-dark mt-4">Where the information comes from</h2>
         <p className="text-[15px]">
-          Dish numbers, names, descriptions and prices are a 25-item sample copied from the restaurant's public Clover Online Ordering page
-          (<a className="underline" href={RESTAURANT.cloverOrderingUrl} target="_blank" rel="noreferrer">thinhankitchentofutampa.cloveronline.com</a>) on Nov 18, 2026, and
+          Dish numbers, names, descriptions and prices are copied from the restaurant's public Clover Online Ordering page
+          (<a className="underline" href={RESTAURANT.cloverOrderingUrl} target="_blank" rel="noreferrer">thinhankitchentofutampa.cloveronline.com</a>) on Nov 18–19, 2026 (the full menu except beer, wine and $0.00 items), and
           cross-checked against its order.online page where possible. Vietnamese spellings with tone marks are our own rendering and need the owner's review.
           Hours come from Google Maps and the Clover page. Tax is set to 7.5%, matching what Clover charged at checkout.
         </p>

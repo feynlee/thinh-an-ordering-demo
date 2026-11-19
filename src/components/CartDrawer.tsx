@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useStore, lineUnitPrice, optionLabels, type CartLine } from "../lib/store";
+import { useStore, lineUnitPrice, optionLabels, defaultChoices, type CartLine } from "../lib/store";
 import { useT } from "../lib/i18n";
 import { findItem } from "../data/menu";
 import { usd } from "../lib/money";
@@ -9,7 +9,7 @@ import { Icon } from "./Icon";
 import { ItemSheet } from "./ItemSheet";
 
 export function CartDrawer() {
-  const { cart, cartOpen, setCartOpen, subtotal, updateLine, removeLine } = useStore();
+  const { cart, cartOpen, setCartOpen, subtotal, updateLine, removeLine, addLine } = useStore();
   const t = useT();
   const [editing, setEditing] = useState<CartLine | null>(null);
   const panel = useRef<HTMLDivElement>(null);
@@ -78,6 +78,7 @@ export function CartDrawer() {
                 );
               })}
             </ul>
+            <Upsell inCart={new Set(cart.map((l) => l.itemId))} onAdd={(id) => { const it = findItem(id); if (it) addLine({ itemId: id, qty: 1, choices: defaultChoices(it) }); }} />
             <div className="border-t border-line p-5 pb-[max(20px,env(safe-area-inset-bottom))] bg-paper">
               <div className="flex justify-between text-[15px]"><span>{t("Subtotal")}</span><span className="font-semibold tabular-nums">{usd(subtotal)}</span></div>
               <p className="text-[12px] text-muted mt-1">Tax and optional tip are added at checkout.</p>
@@ -89,5 +90,26 @@ export function CartDrawer() {
         )}
       </div>
     </>
+  );
+}
+
+const UPSELL = ["thai-tea-mt", "1-cha-gio-heo", "che-3-mau", "4-goi-cuon", "mango-sm", "121-goi-cuon-chay"];
+
+function Upsell({ inCart, onAdd }: { inCart: Set<string>; onAdd: (id: string) => void }) {
+  const picks = UPSELL.filter((id) => !inCart.has(id)).slice(0, 3).map((id) => findItem(id)!).filter(Boolean);
+  if (!picks.length) return null;
+  return (
+    <div className="border-t border-line px-5 pt-4 pb-1">
+      <p className="text-[13px] font-semibold text-muted">Add a little something</p>
+      <div className="mt-2 flex gap-2 overflow-x-auto no-scrollbar pb-2">
+        {picks.map((m) => (
+          <button key={m.id} onClick={() => onAdd(m.id)} className="shrink-0 w-36 rounded-2xl bg-white border border-line text-left overflow-hidden hover:border-jade">
+            <DishVisual item={m} className="w-full h-20" />
+            <span className="block px-2.5 pt-1.5 text-[13px] font-semibold leading-tight truncate">{m.nameVi}</span>
+            <span className="flex items-center justify-between px-2.5 pb-2 text-[12px] text-muted">{usd(m.price)}<span className="w-6 h-6 rounded-full bg-jade text-paper grid place-items-center"><Icon name="plus" className="w-3.5 h-3.5" /></span></span>
+          </button>
+        ))}
+      </div>
+    </div>
   );
 }

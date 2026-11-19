@@ -1,3 +1,4 @@
+import { RAW_ITEMS, DRINK_LINES } from "./fullMenu";
 /**
  * Representative sample menu for the Thịnh An Kitchen & Tofu ordering concept.
  *
@@ -94,8 +95,11 @@ export type CategoryId =
   | "rice"
   | "specialties"
   | "banh-mi"
+  | "vegetarian"
   | "drinks"
-  | "dessert";
+  | "dessert"
+  | "kids"
+  | "catering";
 
 export const CATEGORIES: { id: CategoryId; label: string; labelVi: string; cloverCategory: string }[] = [
   { id: "pho", label: "Phở", labelVi: "Phở", cloverCategory: "NOODLE SOUP (17-23)" },
@@ -105,8 +109,11 @@ export const CATEGORIES: { id: CategoryId; label: string; labelVi: string; clove
   { id: "banh-mi", label: "Bánh mì", labelVi: "Bánh Mì", cloverCategory: "SANDWICHES (132-143)" },
   { id: "appetizers", label: "Appetizers", labelVi: "Khai Vị", cloverCategory: "APPETIZERS (1-16)" },
   { id: "specialties", label: "Chef's specialties", labelVi: "Món Đặc Biệt", cloverCategory: "CHEF SPEACIALTY (58-84)" },
-  { id: "drinks", label: "Tea & smoothies", labelVi: "Trà & Sinh Tố", cloverCategory: "MILK TEA / SMOOTHIES" },
-  { id: "dessert", label: "Dessert", labelVi: "Chè", cloverCategory: "VIETNAMESE DESSSERT" },
+  { id: "vegetarian", label: "Vegetarian", labelVi: "Món Chay", cloverCategory: "VEGETARIAN (120-131)" },
+  { id: "drinks", label: "Tea, smoothies & drinks", labelVi: "Trà, Sinh Tố & Nước", cloverCategory: "MILK TEA / FRUIT TEA / SMOOTHIES / SLUSHIE / BEVERAGES" },
+  { id: "dessert", label: "Dessert", labelVi: "Chè & Tráng Miệng", cloverCategory: "VIETNAMESE DESSSERT / WAFFLE" },
+  { id: "kids", label: "Kids", labelVi: "Trẻ Em", cloverCategory: "KID'S MENU" },
+  { id: "catering", label: "By the pound", labelVi: "Món Mua Ký", cloverCategory: "CATERING" },
 ];
 
 const CLOVER = "https://thinhankitchentofutampa.cloveronline.com/menu/all";
@@ -282,6 +289,59 @@ export const MODIFIER_GROUPS: Record<string, ModifierGroup> = {
       { id: "less-ice", label: "Less ice", price: 0 },
     ],
   },
+  "crispy-soft": {
+    id: "crispy-soft", label: "Noodles", select: "one", required: true, source: "verified-clover-online",
+    options: [
+      { id: "crispy", label: "Crispy egg noodle (Mì giòn)", price: 0 },
+      { id: "soft", label: "Soft stir-fried egg noodle (Mì mềm)", price: 0 },
+    ],
+  },
+  "rice-or-egg-noodle": {
+    id: "rice-or-egg-noodle", label: "Noodles", select: "one", required: true, source: "verified-clover-online",
+    options: [
+      { id: "hu-tieu", label: "Rice noodle (Hủ tiếu)", price: 0 },
+      { id: "mi", label: "Egg noodle (Mì)", price: 0 },
+    ],
+  },
+  "canh-chua-protein": {
+    id: "canh-chua-protein", label: "Choice of", select: "one", required: true, source: "verified-clover-online",
+    options: [
+      { id: "fish", label: "Fish", price: 0 },
+      { id: "shrimp", label: "Shrimp", price: 0 },
+      { id: "tofu", label: "Tofu", price: 0 },
+    ],
+  },
+  "pho-nhu-y": {
+    id: "pho-nhu-y", label: "Pick 2 meats", select: "many", required: true, max: 2, source: "verified-clover-online",
+    options: [
+      { id: "tai", label: "Rare beef (Tái)", price: 0 },
+      { id: "nam", label: "Well-done flank (Nạm)", price: 0 },
+      { id: "gan", label: "Tendon (Gân)", price: 0 },
+      { id: "bo-vien", label: "Meatballs (Bò viên)", price: 0 },
+      { id: "sach", label: "Tripe (Sách)", price: 0 },
+    ],
+  },
+  "duck-side": {
+    id: "duck-side", label: "Served with", select: "one", required: true, source: "verified-clover-online",
+    options: [
+      { id: "bun-mang", label: "Bamboo shoot vermicelli soup", price: 0 },
+      { id: "chao", label: "Congee (Cháo)", price: 0 },
+    ],
+  },
+  "juice-choice": {
+    id: "juice-choice", label: "Juice", select: "one", required: true, source: "verified-clover-online",
+    options: [
+      { id: "orange", label: "Orange", price: 0 },
+      { id: "apple", label: "Apple", price: 0 },
+    ],
+  },
+  "boba": {
+    id: "boba", label: "Toppings", select: "many", source: "editorial",
+    options: [
+      { id: "boba", label: "Tapioca pearls (boba)", price: 0 },
+      { id: "jelly", label: "Jelly", price: 0 },
+    ],
+  },
 };
 
 type Seed = Omit<MenuItem, "sourceUrl" | "lastChecked" | "verification"> & {
@@ -317,7 +377,7 @@ const seed: Seed[] = [
   },
   {
     id: "122-pho-chay", number: "122", nameVi: "Phở Chay Đậu Hũ & Rau", nameClover: "122 Pho Chay Dau Hu & Rau",
-    nameEn: "Vegetarian tofu & vegetable phở", category: "pho",
+    nameEn: "Vegetarian tofu & vegetable phở", category: "vegetarian",
     description: "Vegetarian Tofu and Vegetable with Rice Noodle Soup",
     price: 14.9, art: "pho-chay",
     modifierGroups: ["pho-size", "add-veg", "leave-off"], dietary: ["vegetarian"],
@@ -366,7 +426,7 @@ const seed: Seed[] = [
   },
   {
     id: "127-bun-chay", number: "127", nameVi: "Bún Chay Đậu Hũ & Chả Giò", nameClover: "127 Bun Chay Dau Hu & Cha Gio",
-    nameEn: "Tofu & vegetarian egg roll vermicelli", category: "vermicelli",
+    nameEn: "Tofu & vegetarian egg roll vermicelli", category: "vegetarian",
     description: "Vermicelli w tofu and vegetarian eggroll",
     price: 13.9, art: "bun-chay",
     modifierGroups: ["add-veg", "leave-off"], dietary: ["vegetarian"],
@@ -432,7 +492,7 @@ const seed: Seed[] = [
   },
   {
     id: "131-banh-mi-chay", number: "131", nameVi: "Bánh Mì Đậu Hũ / Bì Chay", nameClover: "131 Banh Mi Dau Hu / Bi Chay",
-    nameEn: "Vegetarian tofu bánh mì", category: "banh-mi",
+    nameEn: "Vegetarian tofu bánh mì", category: "vegetarian",
     description: "Vegetarian Tofu OR Plant-based Shredded Pork Skin Sandwich",
     price: 6.9, art: "banh-mi-chay",
     modifierGroups: ["banh-mi-chay", "banh-mi-options"], dietary: ["vegetarian"],
@@ -455,7 +515,7 @@ const seed: Seed[] = [
   },
   {
     id: "121-goi-cuon-chay", number: "121", nameVi: "Gỏi Cuốn Chay (2)", nameClover: "121 Goi Cuon Chay (2pcs)",
-    nameEn: "Fresh tofu spring rolls, 2 pcs", category: "appetizers",
+    nameEn: "Fresh tofu spring rolls, 2 pcs", category: "vegetarian",
     description: "Tofu Spring Rolls (2PCS)(Soft)",
     price: 5.9, art: "spring-roll-chay",
     modifierGroups: [], dietary: ["vegetarian"],
@@ -496,7 +556,50 @@ const seed: Seed[] = [
   },
 ];
 
-export const MENU: MenuItem[] = seed.map((s) => ({
+for (const d of DRINK_LINES) {
+  MODIFIER_GROUPS[`flavor-${d.id}`] = {
+    id: `flavor-${d.id}`, label: "Flavor", select: "one", required: true, source: "verified-clover-online",
+    options: d.flavors.map((f) => ({ id: f.toLowerCase().replace(/[^a-z]+/g, "-"), label: f, price: 0 })),
+  };
+}
+
+/** Pick a stand-in illustration for items without a hand-picked one. */
+function artFor(name: string, cat: CategoryId): ArtKind {
+  const n = name.toLowerCase();
+  if (cat === "drinks") return /coconut|soy|lemon|water|perrier|juice/.test(n) ? "mango-smoothie" : "thai-tea";
+  if (cat === "dessert") return /durian|thai/.test(n) ? "che-thai" : "che-ba-mau";
+  if (/bánh mì|banh mi/.test(n)) return cat === "vegetarian" ? "banh-mi-chay" : "banh-mi";
+  if (/gỏi cuốn|bì cuốn/.test(n)) return "spring-roll";
+  if (/chả giò|xếp|rangoon|cánh gà|khoai|gà viên/.test(n)) return cat === "vegetarian" ? "egg-roll" : "egg-roll";
+  if (/phở/.test(n) && !/áp chảo/.test(n)) return cat === "vegetarian" ? "pho-chay" : "pho";
+  if (/bún bò huế/.test(n)) return "bun-bo-hue";
+  if (/riêu|canh chua|mì quảng/.test(n)) return "bun-rieu";
+  if (/bún|bánh hỏi/.test(n)) return cat === "vegetarian" ? "bun-chay" : "bun";
+  if (/xào|áp chảo|pad thai/.test(n)) return "pad-thai";
+  if (/lúc lắc|kho tộ|tôm rang|mực|bò kho|cà ri/.test(n)) return "luc-lac";
+  if (/cơm tấm/.test(n)) return "com-tam";
+  if (/cơm|xôi|vịt|gà quay|sườn|thịt nướng|cút/.test(n)) return "com-suon";
+  if (/hủ tiếu|mì|bánh canh|cháo|súp/.test(n)) return cat === "vegetarian" ? "pho-chay" : "pho-ga";
+  return "banh-xeo";
+}
+
+function modsFor(r: { nameClover: string; category: CategoryId }): string[] {
+  const n = r.nameClover.toLowerCase();
+  if (/nhu y/.test(n)) return ["pho-nhu-y", "pho-size", "leave-off"];
+  if (/mi xao/.test(n)) return ["crispy-soft", "leave-off"];
+  if (/sa te/.test(n)) return ["rice-or-egg-noodle", "leave-off"];
+  if (/canh chua/.test(n)) return ["canh-chua-protein"];
+  if (/goi vit/.test(n)) return ["duck-side"];
+  if (/bun cha gio$/.test(n)) return ["eggroll-choice", "leave-off"];
+  if (/orange \/ apple/.test(n)) return ["juice-choice"];
+  if (r.category === "pho") return ["pho-size", "soup-style", "leave-off"];
+  if (r.category === "banh-mi") return ["banh-mi-options"];
+  if (r.category === "drinks") return ["drink-options"];
+  if (["noodle-soup", "vermicelli", "rice", "specialties", "vegetarian"].includes(r.category)) return ["leave-off"];
+  return [];
+}
+
+const curated: MenuItem[] = seed.map((s) => ({
   ...s,
   sourceUrl: CLOVER,
   lastChecked: CHECKED,
@@ -508,8 +611,51 @@ export const MENU: MenuItem[] = seed.map((s) => ({
   },
 }));
 
+const curatedNumbers = new Set(curated.map((m) => m.number).filter(Boolean));
+
+const generated: MenuItem[] = RAW_ITEMS.filter((r) => !r.number || !curatedNumbers.has(r.number)).map((r) => ({
+  id: r.id,
+  number: r.number,
+  nameVi: r.nameVi,
+  nameClover: r.nameClover,
+  nameEn: r.nameEn,
+  category: r.category,
+  description: r.description,
+  price: r.price,
+  art: artFor(r.nameVi, r.category),
+  modifierGroups: modsFor(r),
+  dietary: r.category === "vegetarian" ? ["vegetarian"] : /bún bò huế|cay|spicy|sa tế|mì quảng/i.test(r.nameVi + r.description) ? ["spicy"] : [],
+  dietaryNote: r.category === "vegetarian" ? "Listed in the restaurant's VEGETARIAN section. Broth ingredients not published." : undefined,
+  sourceUrl: CLOVER,
+  lastChecked: "2026-11-19",
+  verification: { price: "verified-clover-online", description: "verified-clover-online", nameVi: "editorial" },
+}));
+
+const drinks: MenuItem[] = DRINK_LINES.map((d) => ({
+  id: d.id,
+  number: null,
+  nameVi: d.nameVi,
+  nameClover: d.flavors.map((f) => `${f.toUpperCase()} ${d.suffix}`).join(", "),
+  nameEn: `${d.nameEn}, ${d.flavors.length} flavors`,
+  category: "drinks" as CategoryId,
+  description: `Choose from ${d.flavors.slice(0, 5).join(", ").toLowerCase()} and ${d.flavors.length - 5} more.`,
+  price: d.price,
+  art: d.id === "smoothie" ? "mango-smoothie" : d.id === "milk-tea" ? "taro-tea" : "thai-tea",
+  modifierGroups: [`flavor-${d.id}`, ...(d.id === "milk-tea" || d.id === "fruit-tea" ? ["boba"] : []), "drink-options"],
+  dietary: [],
+  sourceUrl: CLOVER,
+  lastChecked: "2026-11-19",
+  verification: { price: "verified-clover-online", description: "editorial", nameVi: "editorial" },
+}));
+
+const num = (m: MenuItem) => (m.number ? Number(m.number) : 999);
+export const MENU: MenuItem[] = [...curated, ...generated, ...drinks].sort((a, b) => num(a) - num(b));
+export const MENU_COUNT = MENU.length;
+
 /** Real Clover prices we could not use in the demo, kept for the record. */
 export const EXCLUDED_NOTES = [
+  "Beer and wine (12 beers, 4 wines on Clover) are left out of the online demo. Whether alcohol can be sold for online pickup is the owner's call.",
+  "Items Clover shows as Sold Out (Happy Hour specials, Golden Poultry, Spring Roll) and the unexplained “PHO PERFECTION” ($23.90) and “UPGRADE YOUR DRINK” ($2.50) are left out.",
   "VIETNAMESE COFFEE, SUGARCANE, Iced Tea, Hot Tea and SOFT DRINK show $0.00 on Clover (price likely set by a size option). Left out until the owner confirms prices.",
   "Cajun Boiled Crawfish / Shrimp are market price ($0.00 on Clover). Left out.",
 ];

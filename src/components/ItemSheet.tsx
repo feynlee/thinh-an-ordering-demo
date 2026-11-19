@@ -36,10 +36,15 @@ export function ItemSheet({ item, onClose, editLine }: { item: MenuItem; onClose
     setChoices((c) => {
       const cur = c[gid] ?? [];
       if (one) return { ...c, [gid]: [oid] };
-      return { ...c, [gid]: cur.includes(oid) ? cur.filter((x) => x !== oid) : [...cur, oid] };
+      if (cur.includes(oid)) return { ...c, [gid]: cur.filter((x) => x !== oid) };
+      const max = groups.find((g) => g.id === gid)?.max;
+      const next = [...cur, oid];
+      return { ...c, [gid]: max && next.length > max ? next.slice(next.length - max) : next };
     });
 
+  const missing = groups.filter((g) => g.required && g.select === "many" && (choices[g.id]?.length ?? 0) < (g.max ?? 1));
   const submit = () => {
+    if (missing.length) return;
     const clean = Object.fromEntries(Object.entries(choices).filter(([, v]) => v.length));
     if (editLine) {
       updateLine(editLine.lineId, { choices: clean, qty, note: note.trim() || undefined });
@@ -78,7 +83,7 @@ export function ItemSheet({ item, onClose, editLine }: { item: MenuItem; onClose
           {groups.map((g) => (
             <fieldset key={g.id} className="mt-5">
               <legend className="w-full flex items-baseline justify-between">
-                <span className="font-semibold text-[16px]">{g.label}</span>
+                <span className="font-semibold text-[16px]">{g.label}{g.max && g.select === "many" ? <span className="ml-2 text-[13px] font-normal text-muted">{(choices[g.id]?.length ?? 0)} of {g.max}</span> : null}</span>
                 <span className={`text-[12px] font-semibold rounded-full px-2 py-0.5 ${g.required ? "bg-chili-soft text-chili-dark" : "bg-rice text-muted"}`}>{g.required ? t("Required") : t("Optional")}</span>
               </legend>
               <div className="mt-2 grid gap-2">
@@ -119,8 +124,8 @@ export function ItemSheet({ item, onClose, editLine }: { item: MenuItem; onClose
             <span className="w-7 text-center font-semibold tabular-nums" aria-live="polite">{qty}</span>
             <button className="w-11 h-11 grid place-items-center" onClick={() => setQty((q) => Math.min(20, q + 1))} aria-label="Increase quantity"><Icon name="plus" /></button>
           </div>
-          <button onClick={submit} className="flex-1 h-14 rounded-2xl bg-chili hover:bg-chili-dark text-paper font-semibold text-[16px] flex items-center justify-between px-5">
-            <span>{editLine ? t("Update item") : t("Add to order")}</span>
+          <button onClick={submit} disabled={missing.length > 0} className="flex-1 h-14 rounded-2xl bg-chili hover:bg-chili-dark disabled:bg-muted/50 text-paper font-semibold text-[16px] flex items-center justify-between px-5">
+            <span>{missing.length ? `Choose ${missing[0].label.toLowerCase()}` : editLine ? t("Update item") : t("Add to order")}</span>
             <span className="tabular-nums">{usd(unit * qty)}</span>
           </button>
         </div>

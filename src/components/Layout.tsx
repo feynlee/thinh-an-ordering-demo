@@ -96,7 +96,7 @@ export function Layout({ children, route }: { children: ReactNode; route: string
           </div>
           <div className="text-muted">
             <p className="font-semibold text-ink">About this page</p>
-            <p className="mt-2">A proposal concept made by an independent developer and regular customer. Not affiliated with, endorsed by, or operated by {RESTAURANT.nameAscii}. Prices from the restaurant's public Clover menu, checked Nov 18, 2026. Dish images are original illustrations unless a photo is credited.</p>
+            <p className="mt-2">A proposal concept made by an independent developer and regular customer. Not affiliated with, endorsed by, or operated by {RESTAURANT.nameAscii}. Prices from the restaurant's public Clover menu, checked Nov 19, 2026. Photos load from the restaurant's Google Maps listing and are credited on each dish.</p>
           </div>
         </div>
       </footer>

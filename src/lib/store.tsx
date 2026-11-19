@@ -49,6 +49,16 @@ export function lineUnitPrice(item: MenuItem, choices: Record<string, string[]>)
   return round2(p);
 }
 
+/** The choices a quick "add" uses: first option of each required single-choice group. */
+export function defaultChoices(item: MenuItem) {
+  const out: Record<string, string[]> = {};
+  for (const gid of item.modifierGroups) {
+    const g = MODIFIER_GROUPS[gid];
+    if (g && g.select === "one" && g.required) out[gid] = [g.options[0].id];
+  }
+  return out;
+}
+
 export function optionLabels(choices: Record<string, string[]>) {
   const out: string[] = [];
   for (const [gid, ids] of Object.entries(choices)) {

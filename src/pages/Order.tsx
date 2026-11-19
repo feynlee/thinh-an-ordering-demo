@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { CATEGORIES, MENU, type MenuItem } from "../data/menu";
+import { CATEGORIES, MENU, MENU_COUNT, findItem, type MenuItem } from "../data/menu";
+import { usd } from "../lib/money";
 import { DishCard } from "../components/DishCard";
 import { ItemSheet } from "../components/ItemSheet";
 import { Icon } from "../components/Icon";
@@ -12,10 +13,27 @@ const fold = (s: string) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/
 
 export function Order() {
   const t = useT();
-  const { lang } = useStore();
+  const { lang, orders, addLine, setCartOpen, showToast } = useStore();
   const [q, setQ] = useState("");
   const [veg, setVeg] = useState(false);
-  const [open, setOpen] = useState<MenuItem | null>(null);
+  const [open, setOpenRaw] = useState<MenuItem | null>(() => {
+    const id = new URLSearchParams(window.location.hash.split("?")[1] ?? "").get("item");
+    return id ? findItem(id) ?? null : null;
+  });
+  // Keep the open dish in the URL so a dish can be shared as a link.
+  const setOpen = (m: MenuItem | null) => {
+    setOpenRaw(m);
+    history.replaceState(null, "", `#/order${m ? `?item=${m.id}` : ""}`);
+  };
+  const past = orders.filter((o) => !o.customer.name.startsWith("Sample")).sort((a, b) => b.createdAt - a.createdAt).slice(0, 3);
+  const reorder = (oid: string) => {
+    const o = orders.find((x) => x.id === oid);
+    if (!o) return;
+    let n = 0;
+    for (const l of o.lines) if (findItem(l.itemId)) { addLine({ itemId: l.itemId, qty: l.qty, choices: l.choices, note: l.note }); n += l.qty; }
+    showToast(`Added ${n} item${n === 1 ? "" : "s"} from ${o.id}`);
+    setCartOpen(true);
+  };
   const [active, setActive] = useState<string>(CATEGORIES[0].id);
   const chips = useRef<HTMLDivElement>(null);
 
@@ -66,9 +84,23 @@ export function Order() {
               {openNow() ? <>Pickup today from <strong className="text-ink">{asapLabel()}</strong> · 8104 W Waters Ave</> : <>Closed right now · schedule a pickup at checkout</>}
             </p>
           </div>
-          <p className="text-[13px] text-muted max-w-xs">A 25-dish sample of the restaurant's 140+ item menu. Prices from its Clover menu, Nov 18, 2026.</p>
+          <p className="text-[13px] text-muted max-w-xs">The full menu, {MENU_COUNT} items, with prices from the restaurant's Clover page (Nov 19, 2026). Photos from its Google Maps listing.</p>
         </div>
       </div>
+
+      {past.length > 0 && (
+        <div className="mx-auto max-w-6xl px-4 mt-5">
+          <p className="text-[13px] font-semibold uppercase tracking-[0.14em] text-chili">Order again</p>
+          <div className="mt-2 flex gap-2 overflow-x-auto no-scrollbar pb-1">
+            {past.map((o) => (
+              <button key={o.id} onClick={() => reorder(o.id)} className="shrink-0 rounded-2xl bg-white border border-line px-4 py-2.5 text-left hover:border-jade">
+                <span className="block text-[14px] font-semibold">{o.lines.map((l) => `${l.qty}× ${l.nameVi}`).join(", ").slice(0, 48)}</span>
+                <span className="block text-[12px] text-muted">{o.id} · {usd(o.subtotal)} · tap to add all</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Sticky search + categories */}
       <div className="sticky top-16 z-20 bg-paper/95 backdrop-blur border-b border-line mt-5">

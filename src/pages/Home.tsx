@@ -3,7 +3,8 @@ import { MENU, type MenuItem } from "../data/menu";
 import { RESTAURANT } from "../data/restaurant";
 import { Storefront, AwningTrim } from "../art/Storefront";
 import { DishVisual } from "../components/DishVisual";
-import { findItem } from "../data/menu";
+import { findItem, MENU_COUNT } from "../data/menu";
+import { PLACE_PHOTOS, sized } from "../data/photos";
 import { DishCard } from "../components/DishCard";
 import { ItemSheet } from "../components/ItemSheet";
 import { Icon } from "../components/Icon";
@@ -44,7 +45,7 @@ export function Home() {
             </div>
             <dl className="mt-8 grid grid-cols-3 gap-3 max-w-md text-center">
               {[
-                ["143+", "numbered dishes"],
+                [String(MENU_COUNT), "items on the menu"],
                 ["~15 min", "ASAP pickup"],
                 ["$0", "service fees"],
               ].map(([a, b]) => (
@@ -57,13 +58,13 @@ export function Home() {
           </div>
           <div className="relative md:pb-8 order-first md:order-none">
             <div className="rounded-[28px] overflow-hidden shadow-lift ring-[6px] ring-white">
-              <Storefront className="block w-full h-auto" />
+              <PlacePhoto src={sized(PLACE_PHOTOS.storefront, 1200, 800)} alt="The Thịnh An Kitchen & Tofu storefront on W Waters Ave" className="block w-full aspect-[3/2]" fallback={<Storefront className="block w-full h-auto" />} />
             </div>
             <div className="hidden md:block absolute -left-8 bottom-0 w-[42%] rounded-2xl overflow-hidden shadow-lift ring-4 ring-white -rotate-3 bg-white">
               {pho && <DishVisual item={pho} className="w-full h-[96px] sm:h-[130px]" />}
               <p className="px-3 py-2 text-[12px] font-semibold leading-tight"><span className="text-chili">#17</span> Phở Đặc Biệt</p>
             </div>
-            <p className="mt-2 md:mt-3 md:pl-[44%] text-right text-[11px] text-muted">Illustration of the storefront on W Waters Ave, drawn for this demo.</p>
+            <p className="mt-2 md:mt-3 md:pl-[44%] text-right text-[11px] text-muted">Photo: Thịnh An Kitchen & Tofu on Google Maps.</p>
           </div>
         </div>
       </section>
@@ -135,7 +136,12 @@ export function Home() {
                 Past the hot kitchen there's a long wooden counter of grab-and-go food: house-made tofu, packed meals, snacks and desserts.
                 Hot dishes can be ordered ahead here. Counter items are picked up in the store.
               </p>
-              <p className="mt-4 text-[12px] text-paper/70">Based on public photos of the store. The owner would confirm what's on the counter and whether any of it can be ordered online.</p>
+              <p className="mt-4 text-[12px] text-paper/70">Photos: Thịnh An Kitchen & Tofu on Google Maps. The owner would confirm what's on the counter and whether any of it can be ordered online.</p>
+              <div className="mt-5 grid grid-cols-3 gap-2">
+                {[PLACE_PHOTOS.deli, PLACE_PHOTOS.tofu, PLACE_PHOTOS.eggrollTray].map((u, i) => (
+                  <PlacePhoto key={u} src={sized(u, 400, 300)} alt={["The deli counter", "House-made fried tofu", "Egg rolls on the counter"][i]} className="aspect-[4/3] rounded-xl" fallback={<span className="block w-full h-full bg-wood-dark" />} />
+                ))}
+              </div>
             </div>
             <ul className="grid grid-cols-2 gap-3">
               {[
@@ -229,5 +235,15 @@ function MapArt() {
       <path d="M240 150c-14 0-24 10-24 24 0 18 24 38 24 38s24-20 24-38c0-14-10-24-24-24z" fill="#CF2229" />
       <circle cx="240" cy="174" r="8" fill="#FBF6EA" />
     </svg>
+  );
+}
+
+function PlacePhoto({ src, alt, className = "", fallback }: { src: string; alt: string; className?: string; fallback: JSX.Element }) {
+  const [failed, setFailed] = useState(false);
+  if (failed) return fallback;
+  return (
+    <span className={`relative block overflow-hidden bg-rice ${className}`}>
+      <img src={src} alt={alt} loading="lazy" referrerPolicy="no-referrer" onError={() => setFailed(true)} className="absolute inset-0 w-full h-full object-cover" />
+    </span>
   );
 }
